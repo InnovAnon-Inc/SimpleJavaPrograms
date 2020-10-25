@@ -1,18 +1,58 @@
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Application to print your letter grade given your numerical grade
  * (100-point scale)
  */
 public class Test {
+	
+	private List<Integer>   cutoffs;
+	private List<Character> letters;
+    
+	public Test (Integer[] cutoffs, Character[] letters) {
+		assert (cutoffs.length == letters.length);
+		List<Integer>   cutoffs2 = Arrays.asList (cutoffs);
+		List<Character> letters2 = Arrays.asList (letters);
+		this.cutoffs = Collections.unmodifiableList (cutoffs2);
+		this.letters = Collections.unmodifiableList (letters2);
+	}
+	
+	public Test () {
+		this (
+			new Integer  [] { 90,  80,  70,  60,   0},
+			new Character[] {'A', 'B', 'C', 'D', 'F'}
+		);
+	}
+	
 	/**
 	 * @param grade test or class grade on a 100-point scale
 	 * @return letter grade, assuming normal letter ranges
 	 */
-	public static char getLetterGrade (final int grade) {
+	public char getLetterGrade (final int grade) {
+		int i = this.cutoffs.size ();
+		int j = this.letters.size ();
+		assert (i == j);
+		for (int I = 0; I < i; I++) {
+			int  cutoff = this.cutoffs.get (I);
+			char letter = this.letters.get (I);
+			if (grade >= cutoff) return letter;
+		}
+		throw new AssertionError ();
+		/*
+		assert (grade >   0);
+		//assert (grade < 100);
 		if (grade >= 90) return 'A';
+		assert (grade < 90);
 		if (grade >= 80) return 'B';
+		assert (grade < 80);
 		if (grade >= 70) return 'C';
+		assert (grade < 70);
 		if (grade >= 60) return 'D';
+		assert (grade < 60);
 		return 'F';
+		*/
 	}
 	
 	/**
@@ -21,9 +61,24 @@ public class Test {
 	 * @param letter to test
 	 * @return whether the parameter is a vowel
 	 */
-	public static boolean isVowel (final char letter) {
-		final String sletter = "" + letter;
+	 /*
+	public static boolean isVowel (char letter) {
+		letter = Character.toUpperCase (letter);
+		assert (letter >= 'A');
+		assert (letter <= 'Z');
+		final String sletter = String.valueOf (letter);
 		return "AEIOU".contains (sletter);
+	}
+	*/
+	public static boolean isVowelSounding (char letter) {
+		letter = Character.toUpperCase (letter);
+		assert (letter >= 'A');
+		assert (letter <= 'Z');
+		final String sletter = String.valueOf (letter);
+		boolean  ret = "AEFHILMNORSX"  .contains (sletter);
+		boolean nret = "BCDGJKPQTUVWYZ".contains (sletter);
+		assert (ret != nret);
+		return ret;
 	}
 	
 	/**
@@ -31,19 +86,31 @@ public class Test {
 	 *  @return either 'a' or 'an'
 	 */
 	public static String getArticle (final char letter) {
-		if (Test.isVowel (letter)) return "an";
-		return "a";
+		//return (Test.isVowel (letter) ? "an" : "a");
+		return (Test.isVowelSounding (letter) ? "an" : "a");
+		//if (Test.isVowelSounding (letter)) return "an";
+		//return "a";
+	}
+	
+	public static String capitalize (String word) {
+		char[] c    = word.toCharArray ();
+		       c[0] = Character.toUpperCase (c[0]);
+		       word = String.valueOf (c);
+		return word;
 	}
 	
 	/**
 	 * prints a helpful message about your letter grade
 	 * @param arg test or class grades as ints
 	 */
-	public static void processArgument (final String arg) {
-		final int    grade   = Integer.parseInt (arg);
-		final char   letter  = Test.getLetterGrade (grade);
-		final String article = Test.getArticle (letter);
-		System.out.printf ("You got %s %c.%n", article, letter);
+	public void processArgument (String noun, final String s_grade) {
+		final int    i_grade = Integer.parseInt (s_grade);
+		if (i_grade <   0) throw new IllegalArgumentException ();
+		//if (grade > 100) throw new Exception ();
+		final char   l_grade = this.getLetterGrade (i_grade);
+		final String article = Test.getArticle (l_grade);
+		noun = Test.capitalize (noun);
+		System.out.printf ("%s got %s %c.%n", noun, article, l_grade);
 	}
 	
 	/* example:
@@ -71,22 +138,35 @@ public class Test {
 	/**
 	 * processes a single command line argument
 	 */
-	public static void main_1 (final String... args) {
+	public void main_1 (final String noun, final String... args) {
 		// validate input
-		if (args.length != 1) System.exit (1); // exit status 1 means invalid usage
+		if (args.length != 1) throw new IllegalArgumentException (); // exit status 1 means invalid usage
 		// get single argument
-		final String  grade = args[0];         // this is the one and only arg, a string representing the numeric grade
-		Test.processArgument (arg);
+		final String arg = args[0];         // this is the one and only arg, a string representing the numeric grade
+		this.processArgument (noun, arg);
 	}
 	
 	/**
 	 * processes multiple command line arguments
 	 */
-	public static void main_n (final String... args) {
-		for (final String arg : args) Test.processArgument (arg);
+	public void main_n (final String... args) {
+		//for (final String arg : args) this.processArgument (noun, arg);
+		int i = args.length;
+		if (args.length % 2 != 0) throw new IllegalArgumentException ();
+		assert (i % 2 == 0);
+		for (int I = 0; I < i; I += 2) {
+			String noun = args[I + 0];
+			String arg  = args[I + 1];
+			this.processArgument (noun, arg);
+		}
 	}
 	
 	public static void main (final String... args) {
-		main_1 (args);
+		Test t = new Test ();
+		try { t.main_1 ("you", args); }
+		catch (IllegalArgumentException e) {
+			System.err.println (e);
+			System.exit (1);
+		}
 	}
 }
