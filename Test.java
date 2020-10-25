@@ -46,12 +46,36 @@ public class Test {
 		System.out.printf ("You got %s %c.%n", article, letter);
 	}
 	
+	/* example:
+	    // convert argument to int
+		      int    igrade = Integer.parseInt (grade) // numeric grade as an int
+		// use int argument to determine letter grade
+		      char   lgrade;                           // letter grade
+		     if (igrade >= 90) lgrade = 'A';
+		else if (igrade >= 80) lgrade = 'B';
+		else if (igrade >= 70) lgrade = 'C';
+		else if (igrade >= 60) lgrade = 'D';
+		else                   lgrade = 'F';
+		// use letter grade to get article for proper grammar
+		      String article;                          // either "a" or "an"
+		     if (lgrade == 'A') article = "an";
+		else if (lgrade == 'B') article = "a";
+		else if (lgrade == 'C') article = "a";
+		else if (lgrade == 'D') article = "a";
+		else if (lgrade == 'F') article = "a";
+		else throw Exception ();
+		// output results of computations
+		System.out.println ("You got " + article + " " + lgrade);
+	 */
+	
 	/**
 	 * processes a single command line argument
 	 */
 	public static void main_1 (final String... args) {
+		// validate input
 		if (args.length != 1) System.exit (1); // exit status 1 means invalid usage
-		final String arg = args[0];
+		// get single argument
+		final String  grade = args[0];         // this is the one and only arg, a string representing the numeric grade
 		Test.processArgument (arg);
 	}
 	
