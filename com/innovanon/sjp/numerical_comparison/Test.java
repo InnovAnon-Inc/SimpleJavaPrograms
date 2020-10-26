@@ -1,8 +1,12 @@
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+package com.innovanon.sjp.numerical_comparison;
+
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.innovanon.sjp.Util;
 
 /**
  * Application to print your letter grade given your numerical grade

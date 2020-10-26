@@ -1,3 +1,5 @@
+package com.innovanon.sjp.numerical_comparison;
+
 /**
  * Application to print students' letter grades given their numerical grades
  * (100-point scale)

@@ -1,5 +1,9 @@
+package com.innovanon.sjp.stats;
+
 import java.util.Arrays;
 import java.util.Collections;
+
+import com.innovanon.sjp.Util;
 
 /**
  * Computes and prints statistics about integer command line arguments
