@@ -45,6 +45,24 @@ public class Util {
 	}
 	
 	/**
+	 * convenience method
+	 * @see com.innovanon.sjp.Util#unique (Object[])
+	 */
+	public static boolean unique (final char[] letters) {
+		final Character[] boxed = String.valueOf (letters).chars ().mapToObj (k -> Character.valueOf ((char) k)).toArray (Character[]::new);
+		return unique (boxed);
+	}
+	
+	/**
+	 * convenience method
+	 * @see com.innovanon.sjp.Util#unique (char[])
+	 */
+	public static boolean unique (final String letters) {
+		final char[] c = letters.toCharArray ();
+		return unique (c);
+	}
+	
+	/**
 	 * @return whether the parameters are strictly increasing
 	 * @see java.lang.Comparable#compareTo (java.lang.Comparable)
 	 */
@@ -52,9 +70,23 @@ public class Util {
 		for (int i = 1; i < cutoffs.length; i++) {
 			final T prev = cutoffs[i - 1];
 			final T next = cutoffs[i - 0];
-			if (prev.compareTo (next) <= 0) return false;
+			if (prev.compareTo (next) >= 0) return false; // prev >= next
 		}
 		return true;
+	}
+	
+	/**
+	 * convenience method
+	 * @see com.innovanon.sjp.Util#strictlyIncreasing (Comparable[])
+	 */
+	public static boolean strictlyIncreasing (final int[] cutoffs) {
+		final Integer[] boxed = Arrays.stream (cutoffs).boxed ().toArray (Integer[]::new);
+		return strictlyIncreasing (boxed);
+	}
+	
+	public static boolean strictlyIncreasing (final String cutoffs) {
+		final int[] c = cutoffs.chars ().toArray ();
+		return strictlyIncreasing (c);
 	}
 	
 	/**
@@ -90,6 +122,7 @@ public class Util {
 	 * @see java.lang.Character#toUpperCase (char)
 	 */
 	public static String capitalize (String word) {
+		if (word.isEmpty ()) throw new IllegalArgumentException (); // nothing to capitalize
 		final char[] c    = word.toCharArray ();
 		             c[0] = Character.toUpperCase (c[0]);
 		             word = String.valueOf (c);
@@ -112,6 +145,7 @@ public class Util {
 	private static final Collection<String> POSSESSIVE_PRONOUNS = Collections.unmodifiableCollection (POSSESSIVE_PRONOUN_CONVERSIONS.values ());
 	
 	public static String possessive (final String word) {
+		if (word.isEmpty ()) throw new IllegalArgumentException ();
 		final String word2 = word.toLowerCase (); // normalize
 		if (POSSESSIVE_PRONOUNS.contains (word2)) return word; // skip words that are already possessive
 		if (POSSESSIVE_PRONOUN_CONVERSIONS.containsKey (word)) return POSSESSIVE_PRONOUN_CONVERSIONS.get (word);
