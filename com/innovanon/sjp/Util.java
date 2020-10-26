@@ -1,11 +1,14 @@
 package com.innovanon.sjp;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /** miscellaneous utility methods */
@@ -93,6 +96,29 @@ public class Util {
 		             c[0] = Character.toUpperCase (c[0]);
 		             word = String.valueOf (c);
 		return word;
+	}
+	
+	private static final Map<String, String> POSSESSIVE_PRONOUN_CONVERSIONS;
+	static {
+		Map<String, String> map = new HashMap <String, String> ();
+		map.put ( "me",   "my");
+		map.put ( "Me",   "My");
+		map.put ("you", "your");
+		map.put ("You", "Your");
+		map.put ( "he",  "his");
+		map.put ( "He",  "His");
+		map.put ("she",  "her");
+		map.put ("She",  "Her");
+		POSSESSIVE_PRONOUN_CONVERSIONS = Collections.unmodifiableMap (map);
+	}
+	private static final Collection<String> POSSESSIVE_PRONOUNS = Collections.unmodifiableCollection (POSSESSIVE_PRONOUN_CONVERSIONS.values ());
+	
+	public static String possessive (final String word) {
+		final String word2 = word.toLowerCase (); // normalize
+		if (POSSESSIVE_PRONOUNS.contains (word2)) return word; // skip words that are already possessive
+		if (POSSESSIVE_PRONOUN_CONVERSIONS.containsKey (word)) return POSSESSIVE_PRONOUN_CONVERSIONS.get (word);
+		// TODO handle nuances
+		return String.format ("%s's", word);
 	}
 	
 	/**

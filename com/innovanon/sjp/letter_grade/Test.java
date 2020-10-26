@@ -7,19 +7,28 @@ import java.util.List;
 import com.innovanon.sjp.Util;
 
 /**
- * Application to print your letter grade given your numerical grade
+ * get a message about your letter grade given your numerical grade
  * (100-point scale)
  */
 public class Test {
-	
+	/** cutoffs for the letter grades.
+	 *  different classes may have different cutoffs,
+	 *  so now we're college-ready */
 	private final List<Integer>   cutoffs;
+	/** letter grades (i.e., A, B, C, D, F) */
 	private final List<Character> letters;
     
+    /**
+     * @see com.innovanon.sjp.Util#strictlyIncreasing (Comparable)
+     */
     private static void validate_cutoffs (Integer[] cutoffs) {
 		if (! Util.strictlyIncreasing (cutoffs)) throw new IllegalArgumentException ();
 		int i = cutoffs.length;
 		if (cutoffs[i - 1] != 0) throw new IllegalArgumentException ();
 	}
+	/**
+	 * @see com.innovanon.sjp.Util#unique (Object[])
+	 */
 	private static void validate_letters (Character[] letters) {
 		if (! Util.unique (letters)) throw new IllegalArgumentException ();
 	}
@@ -71,79 +80,22 @@ public class Test {
 	}
 	
 	/**
-	 * doesn't account for the complexity of the English language,
-	 * such as when 'y' and 'w' are vowels.
-	 * @param letter to test
-	 * @return whether the parameter is a vowel
+	 * @param noun student's name or pronoun (i.e., "you")
+	 * @param s_grade test or class grades as ints
+	 * @return a helpful message about your letter grade
+	 * @see com.innovanon.sjp.Util#possessive (java.lang.String)
+	 * @see com.innovanon.sjp.Util#capitalize (java.lang.String)
 	 */
-	 /*
-	public static boolean isVowel (char letter) {
-		letter = Character.toUpperCase (letter);
-		assert (letter >= 'A');
-		assert (letter <= 'Z');
-		final String sletter = String.valueOf (letter);
-		return "AEIOU".contains (sletter);
-	}
-	*/
-	
-	/**
-	 * prints a helpful message about your letter grade
-	 * @param arg test or class grades as ints
-	 */
-	public void processArgument (String noun, final String s_grade) {
+	public String getMessage (String noun, final String s_grade) {
 		final int    i_grade = Integer.parseInt (s_grade);
 		if (i_grade <   0) throw new IllegalArgumentException ();
 		//if (grade > 100) throw new Exception ();
 		final char   l_grade = this.getLetterGrade (i_grade);
 		final String article = Util.getArticle (l_grade);
+		noun = Util.possessive (noun);
 		noun = Util.capitalize (noun);
 		//System.out.printf ("%s got %s %c.%n", noun, article, l_grade);
-		System.out.printf ("Your grade is a %d. That's %s %c.%n",
-		i_grade, article, l_grade);
-	}
-	
-	/* example:
-	    // convert argument to int
-		      int    igrade = Integer.parseInt (grade) // numeric grade as an int
-		// use int argument to determine letter grade
-		      char   lgrade;                           // letter grade
-		     if (igrade >= 90) lgrade = 'A';
-		else if (igrade >= 80) lgrade = 'B';
-		else if (igrade >= 70) lgrade = 'C';
-		else if (igrade >= 60) lgrade = 'D';
-		else                   lgrade = 'F';
-		// use letter grade to get article for proper grammar
-		      String article;                          // either "a" or "an"
-		     if (lgrade == 'A') article = "an";
-		else if (lgrade == 'B') article = "a";
-		else if (lgrade == 'C') article = "a";
-		else if (lgrade == 'D') article = "a";
-		else if (lgrade == 'F') article = "a";
-		else throw Exception ();
-		// output results of computations
-		System.out.println ("You got " + article + " " + lgrade);
-	 */
-	
-	/**
-	 * processes a single command line argument
-	 */
-	public void main_1 (final String noun, final String... args) {
-		// validate input
-		if (args.length != 1) throw new IllegalArgumentException (); // exit status 1 means invalid usage
-		// get single argument
-		final String arg = args[0];         // this is the one and only arg, a string representing the numeric grade
-		this.processArgument (noun, arg);
-	}
-	
-	/**
-	 * @param a single numerical grade
-	 */
-	public static void main (final String... args) {
-		Test t = new Test ();
-		try { t.main_1 ("you", args); }
-		catch (IllegalArgumentException e) {
-			System.err.println (e);
-			System.exit (1);
-		}
+		String ret = String.format ("%s grade is a %d. That's %s %c.%n", noun, i_grade, article, l_grade);
+		return ret;
 	}
 }
