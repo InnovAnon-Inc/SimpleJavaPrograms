@@ -4,6 +4,9 @@
 # java archives
 *.jar
 
+# machine-generated documentation
+doc/
+
 # IDE metadata
 package.bluej
 *.ctxt
