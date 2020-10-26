@@ -43,12 +43,11 @@ public class Test {
 		this.letters = Collections.unmodifiableList (letters2);
 	}
 	
-	public Test () {
-		this (
-			new Integer  [] { 90,  80,  70,  60,   0},
-			new Character[] {'A', 'B', 'C', 'D', 'F'}
-		);
-	}
+	/** reasonable defaults */
+	public Test () { this (
+		new Integer  [] { 90,  80,  70,  60,   0},
+		new Character[] {'A', 'B', 'C', 'D', 'F'}
+	); }
 	
 	/**
 	 * @param grade test or class grade on a 100-point scale

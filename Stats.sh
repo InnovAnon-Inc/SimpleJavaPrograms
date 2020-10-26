@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 set -euxo pipefail
 (( ! $# ))
-javac `find . -iname '*.java'`
+javac -Xlint `find . -iname '*.java'`
 #xargs -L1 -t \
 #  java  Stats < Stats.in
 

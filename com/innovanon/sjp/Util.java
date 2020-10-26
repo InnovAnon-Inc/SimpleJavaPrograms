@@ -21,24 +21,22 @@ public class Util {
 	public static final String CONSONANT_LETTERS = "BCDGJKPQTUVWYZ";
 	
 	/** validates static fields */
-	static {
-		assert (disjoint (VOWEL_LETTERS, CONSONANT_LETTERS));
-	}
+	static { assert (disjoint (VOWEL_LETTERS, CONSONANT_LETTERS)); }
 	
 	/**
 	 * @return whether the parameters contain any common chars
 	 * @see java.util.Collections#disjoint (java.util.Collection, java.util.Collection)
 	 */
 	public static boolean disjoint (final String a, final String b) {
-		final Set<Integer> A = a.chars ().boxed ().collect (Collectors.toSet ());
-		final Set<Integer> B = b.chars ().boxed ().collect (Collectors.toSet ());
+		final Set<Integer> A = a.chars ().parallel ().boxed ().collect (Collectors.toSet ());
+		final Set<Integer> B = b.chars ().parallel ().boxed ().collect (Collectors.toSet ());
 		return Collections.disjoint (A, B);
 	}
 	
 	/**
 	 * @return whether the letters are all unique
 	 */
-	public static <T> boolean unique (final T... letters) {
+	public static <T> boolean unique (final T[] letters) {
 		final List<T> a = Arrays.asList (letters);
 		assert (a.size () == letters.length);
 		final Set <T> b = new HashSet<> (a);
@@ -50,7 +48,7 @@ public class Util {
 	 * @return whether the parameters are strictly increasing
 	 * @see java.lang.Comparable#compareTo (java.lang.Comparable)
 	 */
-	public static <T extends Comparable<T>> boolean strictlyIncreasing (final T... cutoffs) {
+	public static <T extends Comparable<T>> boolean strictlyIncreasing (final T[] cutoffs) {
 		for (int i = 1; i < cutoffs.length; i++) {
 			final T prev = cutoffs[i - 1];
 			final T next = cutoffs[i - 0];
@@ -126,7 +124,7 @@ public class Util {
 	 * @see java.lang.Integer#parseInt (java.lang.String)
 	 */
 	public static int[] parseInts (final String... args) {
-		return Arrays.stream (args).mapToInt (s -> Integer.parseInt (s)).toArray ();
+		return Arrays.stream (args).parallel ().mapToInt (s -> Integer.parseInt (s)).toArray ();
 		//int[] ret = new int[args.length];
 		//for (int i = 0; i < args.length; i++) ret[i] = Integer.parseInt (args[i]);
 		//return ret;
