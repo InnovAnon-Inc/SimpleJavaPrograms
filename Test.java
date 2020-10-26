@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -8,11 +10,30 @@ import java.util.Collections;
  */
 public class Test {
 	
-	private List<Integer>   cutoffs;
-	private List<Character> letters;
+	private final List<Integer>   cutoffs;
+	private final List<Character> letters;
+    
+    private static void validate_cutoffs (Integer[] cutoffs) {
+		int i;
+		for (i = 1; i < cutoffs.length; i++) {
+			Integer prev = cutoffs[i - 1];
+			Integer next = cutoffs[i - 0];
+			if (prev <= next) throw new IllegalArgumentException ();
+		}
+		assert (i == cutoffs.length);
+		if (cutoffs[i - 1] != 0) throw new IllegalArgumentException ();
+	}
+	private static void validate_letters (Character[] letters) {
+		List<Character> a = Arrays.asList (letters);
+		assert (a.size () == letters.length);
+		Set <Character> b = new HashSet<> (a);
+		if (a.size () != b.size ()) throw new IllegalArgumentException ();
+	}
     
 	public Test (Integer[] cutoffs, Character[] letters) {
-		assert (cutoffs.length == letters.length);
+		if (cutoffs.length != letters.length) throw new IllegalArgumentException ();
+		validate_cutoffs (cutoffs);
+		validate_letters (letters);
 		List<Integer>   cutoffs2 = Arrays.asList (cutoffs);
 		List<Character> letters2 = Arrays.asList (letters);
 		this.cutoffs = Collections.unmodifiableList (cutoffs2);
@@ -72,8 +93,8 @@ public class Test {
 	*/
 	public static boolean isVowelSounding (char letter) {
 		letter = Character.toUpperCase (letter);
-		assert (letter >= 'A');
-		assert (letter <= 'Z');
+		if (letter < 'A') throw new IllegalArgumentException ();
+		if (letter > 'Z') throw new IllegalArgumentException ();
 		final String sletter = String.valueOf (letter);
 		boolean  ret = "AEFHILMNORSX"  .contains (sletter);
 		boolean nret = "BCDGJKPQTUVWYZ".contains (sletter);
@@ -110,7 +131,9 @@ public class Test {
 		final char   l_grade = this.getLetterGrade (i_grade);
 		final String article = Test.getArticle (l_grade);
 		noun = Test.capitalize (noun);
-		System.out.printf ("%s got %s %c.%n", noun, article, l_grade);
+		//System.out.printf ("%s got %s %c.%n", noun, article, l_grade);
+		System.out.printf ("Your grade is a %d. That's %s %c.%n",
+		i_grade, article, l_grade);
 	}
 	
 	/* example:
@@ -147,20 +170,8 @@ public class Test {
 	}
 	
 	/**
-	 * processes multiple command line arguments
+	 * @param a single numerical grade
 	 */
-	public void main_n (final String... args) {
-		//for (final String arg : args) this.processArgument (noun, arg);
-		int i = args.length;
-		if (args.length % 2 != 0) throw new IllegalArgumentException ();
-		assert (i % 2 == 0);
-		for (int I = 0; I < i; I += 2) {
-			String noun = args[I + 0];
-			String arg  = args[I + 1];
-			this.processArgument (noun, arg);
-		}
-	}
-	
 	public static void main (final String... args) {
 		Test t = new Test ();
 		try { t.main_1 ("you", args); }
