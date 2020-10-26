@@ -1,4 +1,4 @@
-package com.innovanon.sjp.stats;
+package com.innovanon.sjp.numerical_comparison;
 
 import java.util.Arrays;
 import java.util.Collections;

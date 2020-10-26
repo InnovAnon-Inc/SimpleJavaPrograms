@@ -1,4 +1,4 @@
-package com.innovanon.sjp.numerical_comparison;
+package com.innovanon.sjp.letter_grade;
 
 import java.util.Arrays;
 import java.util.Collections;

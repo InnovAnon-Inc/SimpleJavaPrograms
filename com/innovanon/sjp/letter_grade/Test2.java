@@ -1,4 +1,4 @@
-package com.innovanon.sjp.numerical_comparison;
+package com.innovanon.sjp.letter_grade;
 
 /**
  * Application to print students' letter grades given their numerical grades
