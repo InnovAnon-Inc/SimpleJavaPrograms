@@ -91,34 +91,6 @@ public class Test {
 		return "AEIOU".contains (sletter);
 	}
 	*/
-	public static boolean isVowelSounding (char letter) {
-		letter = Character.toUpperCase (letter);
-		if (letter < 'A') throw new IllegalArgumentException ();
-		if (letter > 'Z') throw new IllegalArgumentException ();
-		final String sletter = String.valueOf (letter);
-		boolean  ret = "AEFHILMNORSX"  .contains (sletter);
-		boolean nret = "BCDGJKPQTUVWYZ".contains (sletter);
-		assert (ret != nret);
-		return ret;
-	}
-	
-	/**
-	 *  @param letter first letter of next word
-	 *  @return either 'a' or 'an'
-	 */
-	public static String getArticle (final char letter) {
-		//return (Test.isVowel (letter) ? "an" : "a");
-		return (Test.isVowelSounding (letter) ? "an" : "a");
-		//if (Test.isVowelSounding (letter)) return "an";
-		//return "a";
-	}
-	
-	public static String capitalize (String word) {
-		char[] c    = word.toCharArray ();
-		       c[0] = Character.toUpperCase (c[0]);
-		       word = String.valueOf (c);
-		return word;
-	}
 	
 	/**
 	 * prints a helpful message about your letter grade
@@ -129,8 +101,8 @@ public class Test {
 		if (i_grade <   0) throw new IllegalArgumentException ();
 		//if (grade > 100) throw new Exception ();
 		final char   l_grade = this.getLetterGrade (i_grade);
-		final String article = Test.getArticle (l_grade);
-		noun = Test.capitalize (noun);
+		final String article = Util.getArticle (l_grade);
+		noun = Util.capitalize (noun);
 		//System.out.printf ("%s got %s %c.%n", noun, article, l_grade);
 		System.out.printf ("Your grade is a %d. That's %s %c.%n",
 		i_grade, article, l_grade);
