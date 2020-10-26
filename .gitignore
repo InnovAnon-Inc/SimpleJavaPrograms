@@ -1,4 +1,10 @@
+# machine-generated files used by the JVM
 *.class
-*.ctxt
+
+# java archives
 *.jar
+
+# IDE metadata
+package.bluej
+*.ctxt
 
