@@ -10,4 +10,5 @@ doc/
 # IDE metadata
 package.bluej
 *.ctxt
+team.defs
 
