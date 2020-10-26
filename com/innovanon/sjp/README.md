@@ -1,1 +1,1 @@
-[![Simple Java Programs]](https://github.com/InnovAnon-Inc/SimpleJavaPrograms)
+[Simple Java Programs](https://github.com/InnovAnon-Inc/SimpleJavaPrograms)

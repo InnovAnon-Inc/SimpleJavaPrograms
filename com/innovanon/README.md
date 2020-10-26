@@ -1,1 +1,1 @@
-[![Innovations Anonymous]](https://InnovAnon-Inc.github.io)
+[Innovations Anonymous](https://InnovAnon-Inc.github.io)
