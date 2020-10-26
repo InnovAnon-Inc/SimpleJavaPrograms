@@ -1,7 +1,6 @@
 package com.innovanon.sjp.numerical_comparison;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import com.innovanon.sjp.Util;
 

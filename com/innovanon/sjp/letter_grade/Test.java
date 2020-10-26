@@ -2,9 +2,7 @@ package com.innovanon.sjp.letter_grade;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.innovanon.sjp.Util;
 
@@ -18,20 +16,12 @@ public class Test {
 	private final List<Character> letters;
     
     private static void validate_cutoffs (Integer[] cutoffs) {
-		int i;
-		for (i = 1; i < cutoffs.length; i++) {
-			Integer prev = cutoffs[i - 1];
-			Integer next = cutoffs[i - 0];
-			if (prev <= next) throw new IllegalArgumentException ();
-		}
-		assert (i == cutoffs.length);
+		if (! Util.strictlyIncreasing (cutoffs)) throw new IllegalArgumentException ();
+		int i = cutoffs.length;
 		if (cutoffs[i - 1] != 0) throw new IllegalArgumentException ();
 	}
 	private static void validate_letters (Character[] letters) {
-		List<Character> a = Arrays.asList (letters);
-		assert (a.size () == letters.length);
-		Set <Character> b = new HashSet<> (a);
-		if (a.size () != b.size ()) throw new IllegalArgumentException ();
+		if (! Util.unique (letters)) throw new IllegalArgumentException ();
 	}
     
 	public Test (Integer[] cutoffs, Character[] letters) {
