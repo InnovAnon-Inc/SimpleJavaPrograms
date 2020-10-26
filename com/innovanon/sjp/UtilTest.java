@@ -15,23 +15,23 @@ public class UtilTest {
     /**
      * Default constructor for test class UtilTest
      */
-    public UtilTest () { /* empty */ }
+    //public UtilTest () { /* empty */ }
 
     /**
      * Sets up the test fixture.
      *
      * Called before every test case method.
      */
-    @Before
-    public void setUp () { /* empty */ }
+    //@Before
+    //public void setUp () { /* empty */ }
 
     /**
      * Tears down the test fixture.
      *
      * Called after every test case method.
      */
-    @After
-    public void tearDown () { /* empty */ }
+    //@After
+    //public void tearDown () { /* empty */ }
     
     /** @see com.innovanon.sjp.Util#disjoint (java.lang.String, java.lang.String) */
     @Test
@@ -149,6 +149,199 @@ public class UtilTest {
 		boolean c = Util.strictlyIncreasing (s);
 		assertFalse (c);
 	}
+	
+	/** @see com.innovanon.sjp.Util#strictlyIncreasing (java.lang.String) */
+	@Test
+	public void testStrictlyIncreasing_nonstrictlydecreasing () {
+		String s = "BAA";
+		boolean c = Util.strictlyIncreasing (s);
+		assertFalse (c);
+	}
+	
+	
+	
+	/** @see com.innovanon.sjp.Util#increasing (java.lang.String) */
+	@Test
+	public void testIncreasing_empty () {
+		String s = "";
+		boolean c = Util.increasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#increasing (java.lang.String) */
+	@Test
+	public void testIncreasing_singleton () {
+		String s = "A";
+		boolean c = Util.increasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#increasing (java.lang.String) */
+	@Test
+	public void testIncreasing_same () {
+		String s = "AA";
+		boolean c = Util.increasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#increasing (java.lang.String) */
+	@Test
+	public void testIncreasing_strictlyincreasing () {
+		String s = "ABC";
+		boolean c = Util.increasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#increasing (java.lang.String) */
+	@Test
+	public void testIncreasing_nonstrictlyincreasing () {
+		String s = "ABB";
+		boolean c = Util.increasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#increasing (java.lang.String) */
+	@Test
+	public void testIncreasing_decreasing () {
+		String s = "CBA";
+		boolean c = Util.increasing (s);
+		assertFalse (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#increasing (java.lang.String) */
+	@Test
+	public void testIncreasing_nonstrictlydecreasing () {
+		String s = "BAA";
+		boolean c = Util.increasing (s);
+		assertFalse (c);
+	}
+	
+	
+	
+	/** @see com.innovanon.sjp.Util#strictlyDecreasing (java.lang.String) */
+	@Test
+	public void testStrictlyDecreasing_empty () {
+		String s = "";
+		boolean c = Util.strictlyDecreasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#strictlyDecreasing (java.lang.String) */
+	@Test
+	public void testStrictlyDecreasing_singleton () {
+		String s = "A";
+		boolean c = Util.strictlyDecreasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#strictlyDecreasing (java.lang.String) */
+	@Test
+	public void testStrictlyDecreasing_same () {
+		String s = "AA";
+		boolean c = Util.strictlyDecreasing (s);
+		assertFalse (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#strictlyDecreasing (java.lang.String) */
+	@Test
+	public void testStrictlyDecreasing_strictlyincreasing () {
+		String s = "ABC";
+		boolean c = Util.strictlyDecreasing (s);
+		assertFalse (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#strictlyDecreasing (java.lang.String) */
+	@Test
+	public void testStrictlyDecreasing_nonstrictlyincreasing () {
+		String s = "ABB";
+		boolean c = Util.strictlyDecreasing (s);
+		assertFalse (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#strictlyDecreasing (java.lang.String) */
+	@Test
+	public void testStrictlyDecreasing_decreasing () {
+		String s = "CBA";
+		boolean c = Util.strictlyDecreasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#strictlyDecreasing (java.lang.String) */
+	@Test
+	public void testStrictlyDecreasing_nonstrictlydecreasing () {
+		String s = "BAA";
+		boolean c = Util.strictlyDecreasing (s);
+		assertFalse (c);
+	}
+	
+	
+	
+	/** @see com.innovanon.sjp.Util#decreasing (java.lang.String) */
+	@Test
+	public void testDecreasing_empty () {
+		String s = "";
+		boolean c = Util.decreasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#decreasing (java.lang.String) */
+	@Test
+	public void testDecreasing_singleton () {
+		String s = "A";
+		boolean c = Util.decreasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#decreasing (java.lang.String) */
+	@Test
+	public void testDecreasing_same () {
+		String s = "AA";
+		boolean c = Util.decreasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#decreasing (java.lang.String) */
+	@Test
+	public void testDecreasing_strictlyincreasing () {
+		String s = "ABC";
+		boolean c = Util.decreasing (s);
+		assertFalse (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#decreasing (java.lang.String) */
+	@Test
+	public void testDecreasing_nonstrictlyincreasing () {
+		String s = "ABB";
+		boolean c = Util.decreasing (s);
+		assertFalse (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#decreasing (java.lang.String) */
+	@Test
+	public void testDecreasing_decreasing () {
+		String s = "CBA";
+		boolean c = Util.decreasing (s);
+		assertTrue (c);
+	}
+	
+	/** @see com.innovanon.sjp.Util#decreasing (java.lang.String) */
+	@Test
+	public void testDecreasing_nonstrictlydecreasing () {
+		String s = "BAA";
+		boolean c = Util.decreasing (s);
+		assertTrue (c);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/** @see com.innovanon.sjp.Util#isVowelSounding (char) */
 	@Test

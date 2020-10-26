@@ -22,7 +22,7 @@ public class Test {
      * @see com.innovanon.sjp.Util#strictlyIncreasing (Comparable)
      */
     private static void validate_cutoffs (Integer[] cutoffs) {
-		if (! Util.strictlyIncreasing (cutoffs)) throw new IllegalArgumentException ();
+		if (! Util.strictlyDecreasing (cutoffs)) throw new IllegalArgumentException ();
 		int i = cutoffs.length;
 		if (cutoffs[i - 1] != 0) throw new IllegalArgumentException ();
 	}
@@ -62,7 +62,8 @@ public class Test {
 			char letter = this.letters.get (I);
 			if (grade >= cutoff) return letter;
 		}
-		throw new AssertionError ();
+		//throw new AssertionError ();
+		throw new IllegalArgumentException ();
 		/*
 		assert (grade >   0);
 		//assert (grade < 100);
@@ -94,7 +95,7 @@ public class Test {
 		noun = Util.possessive (noun);
 		noun = Util.capitalize (noun);
 		//System.out.printf ("%s got %s %c.%n", noun, article, l_grade);
-		String ret = String.format ("%s grade is a %d. That's %s %c.%n", noun, i_grade, article, l_grade);
+		String ret = String.format ("%s grade is %d. That's %s %c.", noun, i_grade, article, l_grade);
 		return ret;
 	}
 }

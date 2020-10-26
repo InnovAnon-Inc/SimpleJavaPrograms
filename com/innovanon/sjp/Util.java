@@ -49,7 +49,7 @@ public class Util {
 	 * @see com.innovanon.sjp.Util#unique (Object[])
 	 */
 	public static boolean unique (final char[] letters) {
-		final Character[] boxed = String.valueOf (letters).chars ().mapToObj (k -> Character.valueOf ((char) k)).toArray (Character[]::new);
+		final Character[] boxed = String.valueOf (letters).chars ().parallel ().mapToObj (k -> Character.valueOf ((char) k)).toArray (Character[]::new);
 		return unique (boxed);
 	}
 	
@@ -62,17 +62,41 @@ public class Util {
 		return unique (c);
 	}
 	
+	public static <T extends Comparable<T>> boolean strictlyIncreasingHelper (final T[] cutoffs, CompareCondition c) {
+		for (int i = 1; i < cutoffs.length; i++) {
+			final T prev = cutoffs[i - 1];
+			final T next = cutoffs[i - 0];
+			if (c.compare (prev, next)) return false; // prev >= next
+		}
+		return true;
+	}
+	
 	/**
 	 * @return whether the parameters are strictly increasing
 	 * @see java.lang.Comparable#compareTo (java.lang.Comparable)
 	 */
 	public static <T extends Comparable<T>> boolean strictlyIncreasing (final T[] cutoffs) {
+		return strictlyIncreasingHelper (cutoffs, (prev, next) -> (prev.compareTo (next) >= 0));
+		/*
 		for (int i = 1; i < cutoffs.length; i++) {
 			final T prev = cutoffs[i - 1];
 			final T next = cutoffs[i - 0];
 			if (prev.compareTo (next) >= 0) return false; // prev >= next
 		}
 		return true;
+		*/
+	}
+	
+	public static <T extends Comparable<T>> boolean increasing (final T[] cutoffs) {
+		return strictlyIncreasingHelper (cutoffs, (prev, next) -> (prev.compareTo (next) > 0));
+	}
+	
+	public static <T extends Comparable<T>> boolean strictlyDecreasing (final T[] cutoffs) {
+		return strictlyIncreasingHelper (cutoffs, (prev, next) -> (prev.compareTo (next) <= 0));
+	}
+	
+	public static <T extends Comparable<T>> boolean decreasing (final T[] cutoffs) {
+		return strictlyIncreasingHelper (cutoffs, (prev, next) -> (prev.compareTo (next) < 0));
 	}
 	
 	/**
@@ -80,13 +104,43 @@ public class Util {
 	 * @see com.innovanon.sjp.Util#strictlyIncreasing (Comparable[])
 	 */
 	public static boolean strictlyIncreasing (final int[] cutoffs) {
-		final Integer[] boxed = Arrays.stream (cutoffs).boxed ().toArray (Integer[]::new);
+		final Integer[] boxed = Arrays.stream (cutoffs).parallel ().boxed ().toArray (Integer[]::new);
 		return strictlyIncreasing (boxed);
+	}
+	
+	public static boolean increasing (final int[] cutoffs) {
+		final Integer[] boxed = Arrays.stream (cutoffs).parallel ().boxed ().toArray (Integer[]::new);
+		return increasing (boxed);
+	}
+	
+	public static boolean strictlyDecreasing (final int[] cutoffs) {
+		final Integer[] boxed = Arrays.stream (cutoffs).parallel ().boxed ().toArray (Integer[]::new);
+		return strictlyDecreasing (boxed);
+	}
+	
+	public static boolean decreasing (final int[] cutoffs) {
+		final Integer[] boxed = Arrays.stream (cutoffs).parallel ().boxed ().toArray (Integer[]::new);
+		return decreasing (boxed);
 	}
 	
 	public static boolean strictlyIncreasing (final String cutoffs) {
 		final int[] c = cutoffs.chars ().toArray ();
 		return strictlyIncreasing (c);
+	}
+	
+	public static boolean increasing (final String cutoffs) {
+		final int[] c = cutoffs.chars ().toArray ();
+		return increasing (c);
+	}
+	
+	public static boolean strictlyDecreasing (final String cutoffs) {
+		final int[] c = cutoffs.chars ().toArray ();
+		return strictlyDecreasing (c);
+	}
+	
+	public static boolean decreasing (final String cutoffs) {
+		final int[] c = cutoffs.chars ().toArray ();
+		return decreasing (c);
 	}
 	
 	/**
