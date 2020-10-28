@@ -1,0 +1,15 @@
+<!-- NOTE: MAKE SURE THAT settings.xml IS NOT WORLD READABLE! -->
+<settings>
+	<servers>
+		<server>
+			<id>github</id>
+			<username>${env.GITHUB_API_USERNAME}</username>
+	    		<password>${env.GITHUB_API_PASSWORD}</password>
+		</server>
+		<server>
+			<id>your.keyname</id>
+			<passphrase></passphrase>
+		</server>
+	</servers>
+</settings>
+
