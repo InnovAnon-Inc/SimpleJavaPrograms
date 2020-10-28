@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.innovanon.sjp</groupId>
+	<artifactId>sjp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Simple Java Programs</name>
+	<description>Simple Java Programs Parent POM for Maven</description>
+	<url>https://github.com/InnovAnon-Inc/SimpleJavaPrograms</url>
+	<inceptionYear>2020</inceptionYear>
+
+	<parent>
+		<groupId>com.innovanon</groupId>
+		<artifactId>ia</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<modules>
+		<module>util</module>
+		<!--<module>letter_grade</module>
+		<module>numerical_comparison</module>-->
+	</modules>
+	
+	<scm>
+		<connection>scm:git:git@github.com:${repo.user}/${repo.name}.git</connection>
+		<developerConnection>scm:git:https://github.com/${repo.user}/${repo.name}.git</developerConnection>
+		<url>https://github.com/${repo.user}/${repo.name}</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<system>Github Issues</system>
+		<url>https://github.com/${repo.user}/${repo.name}/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>CircleCI</system>
+		<url>https://app.circleci.com/pipelines/github/${repo.user}/${repo.name}</url>
+		<notifiers>
+			<notifier>
+				<address>InnovAnon-Inc@protonmail.com</address>
+				<type>mail</type>
+			</notifier>
+			<notifier>
+				<address>InnovAnon-Inc@gmx.com</address>
+				<type>mail</type>
+			</notifier>
+			<notifier>
+				<address>InnovAnon-Inc@tutanota.com</address>
+				<type>mail</type>
+			</notifier>
+			<notifier>
+				<address>InnovAnon@mailfence.com</address>
+				<type>mail</type>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+	
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+		
+		<site>
+			<id>internal.site</id>
+			<name>Temporary Staging Site</name>
+			<url>file://${project.build.directory}/gh-pages</url>
+		</site>
+    </distributionManagement>
+	
+	<repositories>
+		<repository>
+			<id>mvn-repo</id>
+			<url>https://raw.github.com/InnovAnon-Inc/IA/mvn-repo/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<properties>
+		<repo.user>InnovAnon-Inc</repo.user>
+		<repo.name>SimpleJavaPrograms</repo.name>
+	</properties>
+
+	<build>
+		<!--<defaultGoal>deploy</defaultGoal>-->
+		
+		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.12</version>
+				<configuration combine.self="override">
+					<repositoryName>${repo.name}</repositoryName>
+					<repositoryOwner>${repo.user}</repositoryOwner>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${maven-project-info-reports-plugin.version}</version>
+				<reportSets combine.self="override">
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>modules</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven-jxr-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+							<report>test-aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
