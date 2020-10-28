@@ -5,20 +5,20 @@
   <version>0.0.1-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20201028.060535</timestamp>
+      <timestamp>20201028.063917</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20201028060535</lastUpdated>
+    <lastUpdated>20201028063917</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>0.0.1-20201028.060535-1</value>
-        <updated>20201028060535</updated>
+        <value>0.0.1-20201028.063917-1</value>
+        <updated>20201028063917</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom.asc</extension>
-        <value>0.0.1-20201028.060535-1</value>
-        <updated>20201028060535</updated>
+        <value>0.0.1-20201028.063917-1</value>
+        <updated>20201028063917</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
