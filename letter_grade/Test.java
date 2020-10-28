@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.innovanon.sjp.Util;
+import com.innovanon.sjp.util.Util;
 
 /**
  * get a message about your letter grade given your numerical grade

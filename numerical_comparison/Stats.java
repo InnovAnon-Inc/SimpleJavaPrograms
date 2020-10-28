@@ -2,7 +2,7 @@ package com.innovanon.sjp.numerical_comparison;
 
 import java.util.Arrays;
 
-import com.innovanon.sjp.Util;
+import com.innovanon.sjp.util.Util;
 
 /**
  * Computes and prints statistics about integer command line arguments

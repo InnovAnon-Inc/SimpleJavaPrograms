@@ -18,6 +18,12 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
+	<modules>
+		<module>util</module>
+		<!--<module>letter_grade</module>
+		<module>numerical_comparison</module>-->
+	</modules>
+	
 	<scm>
 		<connection>scm:git:git@github.com:InnovAnon-Inc/SimpleJavaPrograms.git</connection>
 		<developerConnection>scm:git:https://github.com/InnovAnon-Inc/SimpleJavaPrograms.git</developerConnection>
@@ -71,242 +77,19 @@
 	</dependencies>
 
 	<build>
-		<defaultGoal>deploy</defaultGoal>
+		<!--<defaultGoal>deploy</defaultGoal>-->
+		
 		<plugins>
-			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven-jar-plugin.version}</version>
-				<inherited>true</inherited>
-				<configuration>
-					<archive>
-						<index>true</index>
-						<manifest>
-							<mainClass>${project.groupId}.${project.artifactId}.App</mainClass>
-						</manifest>
-						<addMavenDescriptor>true</addMavenDescriptor>
-						<compress>true</compress>
-						<recompressAddedZips>true</recompressAddedZips>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
-			<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>${maven-source-plugin.version}</version>
-				<inherited>true</inherited>
-				<configuration>
-					<includePom>true</includePom>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			-->
-			<!-- TODO -->
-			<!--
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.2.0</version>
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			-->
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
 				<version>0.12</version>
-				<configuration>
+				<configuration combine.self="override">
 					<repositoryName>SimpleJavaPrograms</repositoryName>
 					<repositoryOwner>InnovAnon-Inc</repositoryOwner>
 				</configuration>
-				<executions>
-					<execution>
-						<id>gh-pages</id>
-						<configuration>
-							<description>[ci skip] Docs ${project.name} build, ${project.version} release</description>
-							<message>[ci skip] Official ${project.name} build</message>
-							<server>github</server>
-							<path>${site.path}</path>
-							<!-- Use merge or override the content -->
-							<merge>false</merge>
-						</configuration>
-						<goals>
-							<goal>site</goal>
-						</goals>
-						<phase>site</phase>
-					</execution>
-					<execution>
-						<id>mvn-repo</id>
-						<configuration>
-							<description>[ci skip] Repo ${project.name} build, ${project.version} release</description> <!-- git commit message -->
-							<message>[ci skip] Official ${project.name} build</message>
-							<noJekyll>true</noJekyll>  <!-- disable webpage processing -->
-							<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-							<branch>refs/heads/mvn-repo</branch> <!-- remote branch name -->
-							<includes><include>**/*</include></includes>
-							<merge>true</merge>
-						</configuration>
-						<goals>
-							<goal>site</goal>
-						</goals>
-						<phase>deploy</phase>
-					</execution>
-				</executions>
 			</plugin>
-			
-			<!-- TODO -->
-			<!--
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.9.1</version>
-				<configuration>
-					<reportPlugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-project-info-reports-plugin</artifactId>
-							<version>2.5</version>
-							<reportSets>
-								<reportSet>
-									<reports>
-										<report>dependencies</report>
-										<report>project-team</report>
-										<report>mailing-list</report>
-										<report>cim</report>
-										<report>issue-tracking</report>
-										<report>license</report>
-										<report>scm</report>
-									</reports>
-								</reportSet>
-							</reportSets>
-						</plugin>
-					</reportPlugins>
-				</configuration>
-			</plugin>
-			-->
-			<!--
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>3.0.0-M1</version>
-				<configuration>
-					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
-				</configuration>
-			</plugin> 
-			-->
-			
-			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
-			<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin.version}</version>
-				<inherited>true</inherited>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-			-->
-			
-			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-			<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
-				<inherited>true</inherited>
-				<configuration>
-					<compilerVersion>${java.version}</compilerVersion>
-					<optimize>true</optimize>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-					<release>${java.version}</release>
-					<jdkToolchain>
-					<version>${java.version}</version>
-					</jdkToolchain>
-					<debug>${debug}</debug>
-				</configuration>
-			</plugin>
-			-->
-
-			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-enforcer-plugin -->
-			<!--
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.0.0-M2</version>
-				<executions>
-					<execution>
-						<id>enforce-maven-3</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireMavenVersion>
-									<version>3.6.3</version>
-								</requireMavenVersion>
-							</rules>
-							<fail>true</fail>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			-->
-			
-			
-			<!-- install plugin -->
-			<!-- release plugin -->
-			<!-- deploy plugin -->
-    			
-			
-			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
-			<!--
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>${maven-gpg-plugin.version}</version>
-				<configuration>
-					<keyname>${gpg.keyname}</keyname>
-					<passphraseServerId>${gpg.keyname}</passphraseServerId>
-				</configuration>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions> 
-			</plugin>
-			-->
 		</plugins>
 	</build>
 </project>
