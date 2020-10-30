@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run: |
           echo -e "$GPG_KEY" | gpg --import
-          mvn -X -s .circleci/settings.xml -DskipTests site
+          mvn -X -s .circleci/settings.xml -DskipTests site-deploy
   deploy:
     docker:
       - image: circleci/openjdk:stretch

@@ -2,26 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>util</artifactId>
+	<artifactId>numerical_comparison</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Util</name>
-	<description>Miscellaneous Utilities</description>
+	<name>Numerical Comparison</name>
+	<description>Simple Statistics Program</description>
 	
 	<parent>
 		<groupId>com.innovanon.sjp</groupId>
 		<artifactId>sjp</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
-	<!--
-	<distributionManagement>
-		<site>
-			<id>${project.artifactId}-site</id>
-			<url>${project.baseUri}/${project.artifactId}</url>
-		</site>
-    </distributionManagement>
-	-->
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.innovanon.sjp</groupId>
+			<artifactId>util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 	
 	<build>
 		<plugins>
@@ -34,7 +33,7 @@
 				<configuration combine.self="override">
 					<archive>
 						<manifest>
-							<mainClass>${project.groupId}.${project.artifactId}.Util</mainClass>
+							<mainClass>${project.groupId}.${project.artifactId}.Stats</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

@@ -147,6 +147,8 @@ public class Util {
 	 * @return whether the parameter starts with a vowel-sound
 	 * @see com.innovanon.sjp.Util#VOWEL_LETTERS
 	 * @see com.innovanon.sjp.Util#CONSONANT_LETTERS
+	 * @author st
+	 * @author z
 	 */
 	public static boolean isVowelSounding (char letter) {
 		letter = Character.toUpperCase (letter);
@@ -160,9 +162,11 @@ public class Util {
 	}
 	
 	/**
-	 *  @param letter first letter of next word
-	 *  @return either 'a' or 'an'
-	 *  @see com.innovanon.sjp.Util#isVowelSounding (char)
+	 * @param letter first letter of next word
+	 * @return either 'a' or 'an'
+	 * @see com.innovanon.sjp.Util#isVowelSounding (char)
+	 * @author z
+	 * @author st 
 	 */
 	public static String getArticle (final char letter) {
 		//return (Test.isVowel (letter) ? "an" : "a");
@@ -210,6 +214,8 @@ public class Util {
 	/**
 	 * converts multiple strings to ints
 	 * @see java.lang.Integer#parseInt (java.lang.String)
+	 * @author z
+	 * @author st
 	 */
 	public static int[] parseInts (final String... args) {
 		return Arrays.stream (args).parallel ().mapToInt (s -> Integer.parseInt (s)).toArray ();

@@ -1,8 +1,9 @@
 package com.innovanon.sjp.numerical_comparison;
 
 import java.util.Arrays;
+import java.util.function.IntBinaryOperator;
 
-import com.innovanon.sjp.util.Util;
+import com.innovanon.sjp.Util;
 
 /**
  * Computes and prints statistics about integer command line arguments
@@ -28,18 +29,26 @@ public class Stats {
 		//this.min  = Stats.min (args);
 		//this.max  = Stats.max (args);
 	}
-    
+	
+	private int sum_helper (int id, IntBinaryOperator f) { return Arrays.stream (args).parallel ().reduce (id, f); }
+	/*
+	private int sum_helper (int id, IntBinaryOperator f) {
+		int sum = id;
+		for (int n : this.args) sum = f (sum, n);
+		return sum;
+	}
+    */
     /**
      * @return sum of elements of array
      */
-    public int sum () { return Arrays.stream (args).parallel ().reduce (0, (a, b) -> (a + b)); }
+    public int sum () { return sum_helper (0, (a, b) -> (a + b)); }
 	
 	/**
 	 * @return product of elements of array
 	 */
 	public int product () {
 		// TODO int overflow ?
-		return Arrays.stream (args).parallel ().reduce (1, (a, b) -> (a * b));
+		return sum_helper (1, (a, b) -> (a * b));
 	}
 	
 	/**
