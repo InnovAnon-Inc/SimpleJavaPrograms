@@ -133,16 +133,112 @@
 	<build>
 		<!--<defaultGoal>deploy</defaultGoal>-->
 		
+		<!-- BlueJ compatibility: main sources live in src/ instead of src/main/java -->
+		<sourceDirectory>${project.basedir}</sourceDirectory>
+		<!-- BlueJ compatibility: test sources live in src/ instead of src/test/java -->
+		<testSourceDirectory>${project.basedir}</testSourceDirectory>
+		<resources>
+			<resource>
+				<!-- BlueJ compatibility: resources live in src/ instead of src/main/resources -->
+				<directory>${project.basedir}</directory>
+				<excludes>
+					<!-- BlueJ compatibility: ignore .class files that may end up in the source tree -->
+					<exclude>**/*.class</exclude>
+					<!-- source files are not resources -->
+					<exclude>**/*.java</exclude>
+					<!-- ignore test sources -->
+					<exclude>**/*Test.*</exclude>
+					<!-- ignore test resources -->
+					<exclude>**/*test.*</exclude>
+					<exclude>**/target**</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<!-- BlueJ compatibility: test resources live in src/ instead of src/test/resources -->
+				<directory>${project.basedir}</directory>
+				<excludes>
+					<!-- source files are not test resources -->
+					<exclude>**/*.java</exclude>
+					<!-- BlueJ compatibility: ignore .class files that may end up in the test source tree -->
+					<exclude>**/*.class</exclude>
+					<exclude>**/target/**</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<inherited>true</inherited>
+					<executions>
+						<execution>
+							<id>default-compile</id>
+							<configuration>
+								<!--<includes>
+									<include>**/*.java</include>
+								</includes>-->
+								<!-- BlueJ compatibility: exclude test sources and .class files -->
+								<excludes>
+									<exclude>**/*Test.java</exclude>
+									<exclude>**/*.class</exclude>
+									<exclude>**/target/**</exclude>
+								</excludes>
+							</configuration>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+							<phase>compile</phase>
+						</execution>
+						<execution>
+							<id>default-testCompile</id>
+							<configuration>
+								<!-- BlueJ compatibility: include test sources -->
+								<testIncludes>
+									<testInclude>**/*Test.java</testInclude>
+								</testIncludes>
+								<!-- BlueJ compatibility: exclude .class files -->
+								<testExcludes>
+									<testExclude>**/*.class</testExclude>
+									<testExclude>**/target/**</testExclude>
+								</testExcludes>
+							</configuration>
+							<goals>
+								<goal>testCompile</goal>
+							</goals>
+							<phase>test-compile</phase>
+						</execution>
+					</executions>
+				</plugin>
+					
+				<plugin>
+					<inherited>true</inherited>
+					<groupId>com.github.github</groupId>
+					<artifactId>site-maven-plugin</artifactId>
+					<version>${site-maven-plugin.version}</version>
+					<configuration combine.self="override">
+						<repositoryName>${repo.name}</repositoryName>
+						<repositoryOwner>${repo.user}</repositoryOwner>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+			</plugin>
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
-				<version>0.12</version>
-				<configuration combine.self="override">
-					<repositoryName>${repo.name}</repositoryName>
-					<repositoryOwner>${repo.user}</repositoryOwner>
-				</configuration>
+				<version>${site-maven-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
