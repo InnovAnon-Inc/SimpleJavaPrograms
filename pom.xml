@@ -89,10 +89,18 @@
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
 		
+		<!--
 		<site>
 			<id>${project.artifactId}-site</id>
 			<name>Temporary Staging Site</name>
 			<url>file://${project.build.directory}/gh-pages</url>
+		</site>
+		-->
+		<site>
+			<id>gh-pages</id>
+			<name>Maven Site Deployment</name>
+			<!--<url>github:http://${repo.user}.github.io/${repo.name}/</url>-->
+			<url>git:ssh://git@github.com/${repo.user}/${repo.name}.git?gh-pages#</url>
 		</site>
     </distributionManagement>
 	

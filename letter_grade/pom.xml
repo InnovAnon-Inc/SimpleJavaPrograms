@@ -24,19 +24,49 @@
 	
 	<build>
 		<plugins>
-			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven-jar-plugin.version}</version>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven-assembly-plugin.version}</version>
 				<inherited>true</inherited>
-				<configuration combine.self="override">
-					<archive>
-						<manifest>
-							<mainClass>${project.groupId}.${project.artifactId}.Test1</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
+				<executions>
+					<execution>
+						<id>version-1</id>
+						<configuration combine.self="override">
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>${project.groupId}.${project.artifactId}.Test1</mainClass>
+								</manifest>
+							</archive>
+							<finalName>letter-grade</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>version-2</id>
+						<configuration combine.self="override">
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>${project.groupId}.${project.artifactId}.Test2</mainClass>
+								</manifest>
+							</archive>
+							<finalName>letter-grade-2</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
