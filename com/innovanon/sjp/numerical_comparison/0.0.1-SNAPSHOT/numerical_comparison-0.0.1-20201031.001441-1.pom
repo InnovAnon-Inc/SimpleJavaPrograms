@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>numerical_comparison</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Numerical Comparison</name>
+	<description>Simple Statistics Program</description>
+	
+	<parent>
+		<groupId>com.innovanon.sjp</groupId>
+		<artifactId>sjp</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.innovanon.sjp</groupId>
+			<artifactId>util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<inherited>true</inherited>
+				<executions>
+					<execution>
+						<id>version-1</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<mainClass>${project.groupId}.${project.artifactId}.Stats</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+					<execution>
+						<id>version-2</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<mainClass>${project.groupId}.${project.artifactId}.StatsCacher</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+					<execution>
+						<id>version-3</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<mainClass>${project.groupId}.${project.artifactId}.Stats2</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+					<execution>
+						<id>version-4</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<mainClass>${project.groupId}.${project.artifactId}.StatsCacher2</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven-assembly-plugin.version}</version>
+				<inherited>true</inherited>
+				<executions>
+					<execution>
+						<id>version-1</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<mainClass>${project.groupId}.${project.artifactId}.Stats</mainClass>
+								</manifest>
+							</archive>
+							<finalName>stats</finalName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>version-2</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<mainClass>${project.groupId}.${project.artifactId}.StatsCacher</mainClass>
+								</manifest>
+							</archive>
+							<finalName>stats-cacher</finalName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>version-3</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<mainClass>${project.groupId}.${project.artifactId}.Stats2</mainClass>
+								</manifest>
+							</archive>
+							<finalName>stats-2</finalName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>version-4</id>
+						<configuration combine.self="override">
+							<archive>
+								<manifest>
+									<mainClass>${project.groupId}.${project.artifactId}.StatsCacher2</mainClass>
+								</manifest>
+							</archive>
+							<finalName>stats-cacher-2</finalName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven-jxr-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<inherited>true</inherited>
+						<reports>
+							<report>jxr</report>
+							<report>test-jxr</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
