@@ -11,6 +11,7 @@ doc/
 package.bluej
 *.ctxt
 team.defs
+bluej.pkg
 
 target/
 pom.xml.tag

@@ -151,6 +151,17 @@
 					<!-- ignore test resources -->
 					<exclude>**/*test.*</exclude>
 					<exclude>**/target**</exclude>
+					<!-- SCM -->
+					<exclude>**/.git/**</exclude>
+					<exclude>**/.gitignore</exclude>
+					<!-- IDE metadata -->
+					<exclude>**/package.bluej</exclude>
+					<exclude>**/*.ctxt</exclude>
+					<exclude>**/team.defs</exclude>
+					<exclude>**/bluej.pkg</exclude>
+					<!-- miscellaneous metadata -->
+					<exclude>README.md</exclude>
+					<exclude>LICENSE</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -164,6 +175,17 @@
 					<!-- BlueJ compatibility: ignore .class files that may end up in the test source tree -->
 					<exclude>**/*.class</exclude>
 					<exclude>**/target/**</exclude>
+					<!-- SCM -->
+					<exclude>**/.git/**</exclude>
+					<exclude>**/.gitignore</exclude>
+					<!-- IDE metadata -->
+					<exclude>**/package.bluej</exclude>
+					<exclude>**/*.ctxt</exclude>
+					<exclude>**/team.defs</exclude>
+					<exclude>**/bluej.pkg</exclude>
+					<!-- miscellaneous metadata -->
+					<exclude>README.md</exclude>
+					<exclude>LICENSE</exclude>
 				</excludes>
 			</testResource>
 		</testResources>
@@ -187,6 +209,17 @@
 									<exclude>**/*Test.java</exclude>
 									<exclude>**/*.class</exclude>
 									<exclude>**/target/**</exclude>
+									<!-- SCM -->
+									<exclude>**/.git/**</exclude>
+									<exclude>**/.gitignore</exclude>
+									<!-- IDE metadata -->
+									<exclude>**/package.bluej</exclude>
+									<exclude>**/*.ctxt</exclude>
+									<exclude>**/team.defs</exclude>
+									<exclude>**/bluej.pkg</exclude>
+									<!-- miscellaneous metadata -->
+									<exclude>README.md</exclude>
+									<exclude>LICENSE</exclude>
 								</excludes>
 							</configuration>
 							<goals>
@@ -205,6 +238,17 @@
 								<testExcludes>
 									<testExclude>**/*.class</testExclude>
 									<testExclude>**/target/**</testExclude>
+									<!-- SCM -->
+									<testExclude>**/.git/**</testExclude>
+									<testExclude>**/.gitignore</testExclude>
+									<!-- IDE metadata -->
+									<testExclude>**/package.bluej</testExclude>
+									<testExclude>**/*.ctxt</testExclude>
+									<testExclude>**/team.defs</testExclude>
+									<testExclude>**/bluej.pkg</testExclude>
+									<!-- miscellaneous metadata -->
+									<testExclude>README.md</testExclude>
+									<testExclude>LICENSE</testExclude>
 								</testExcludes>
 							</configuration>
 							<goals>
