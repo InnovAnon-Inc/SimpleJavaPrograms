@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>com.innovanon</groupId>
 		<artifactId>ia</artifactId>
-		<version>0.0.15-SNAPSHOT</version>
+		<version>0.0.17-SNAPSHOT</version>
 	</parent>
 	
 	<contributors>
