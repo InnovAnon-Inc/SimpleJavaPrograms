@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run: |
           echo -e "$GPG_KEY" | gpg --import
-          mvn -X -s .circleci/settings.xml verify
+          mvn -e -s .circleci/settings.xml clean compile verify
   site:
     docker:
       - image: circleci/openjdk:stretch
@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run: |
           echo -e "$GPG_KEY" | gpg --import
-          mvn -X -s .circleci/settings.xml -DskipTests site-deploy
+          mvn -e -s .circleci/settings.xml -DskipTests clean compile site:site site:stage site:deploy
   deploy:
     docker:
       - image: circleci/openjdk:stretch
@@ -24,7 +24,15 @@ jobs:
       - checkout
       - run: |
           echo -e "$GPG_KEY" | gpg --import
-          mvn -X -s .circleci/settings.xml -DskipTests deploy
+          mvn -e -s .circleci/settings.xml -DskipTests clean compile deploy
+  release:
+    docker:
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - run: |
+          echo -e "$GPG_KEY" | gpg --import
+          mvn -e -s .circleci/settings.xml -DskipTests --batch release:clean release:prepare release:perform
 
 workflows:
   version: 2.0
@@ -45,6 +53,14 @@ workflows:
                 - gh-pages
                 - mvn-repo
       - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - mvn-repo
+      - release:
           requires:
             - test
           filters:

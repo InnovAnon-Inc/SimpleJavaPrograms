@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>com.innovanon</groupId>
 		<artifactId>ia</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.15-SNAPSHOT</version>
 	</parent>
 	
 	<contributors>
@@ -46,7 +46,7 @@
 		<module>letter_grade</module>
 		<module>numerical_comparison</module>
 	</modules>
-	
+	<!--
 	<scm>
 		<connection>scm:git:git@github.com:${repo.user}/${repo.name}.git</connection>
 		<developerConnection>scm:git:https://github.com/${repo.user}/${repo.name}.git</developerConnection>
@@ -83,27 +83,9 @@
 	</ciManagement>
 	
 	<distributionManagement>
-		<repository>
-			<id>internal.repo</id>
-			<name>Temporary Staging Repository</name>
-			<url>file://${project.build.directory}/mvn-repo</url>
-		</repository>
 		
-		<!--
-		<site>
-			<id>${project.artifactId}-site</id>
-			<name>Temporary Staging Site</name>
-			<url>file://${project.build.directory}/gh-pages</url>
-		</site>
-		-->
-		<site>
-			<id>gh-pages</id>
-			<name>Maven Site Deployment</name>
-			<!--<url>github:http://${repo.user}.github.io/${repo.name}/</url>-->
-			<url>git:ssh://git@github.com/${repo.user}/${repo.name}.git?gh-pages#</url>
-		</site>
     </distributionManagement>
-	
+	-->
 	<repositories>
 		<repository>
 			<id>mvn-repo-pp</id>
@@ -116,7 +98,6 @@
 	</repositories>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -126,7 +107,7 @@
 	</dependencies>
 	
 	<properties>
-		<repo.user>InnovAnon-Inc</repo.user>
+		<!--<repo.user>InnovAnon-Inc</repo.user>-->
 		<repo.name>SimpleJavaPrograms</repo.name>
 	</properties>
 
@@ -258,7 +239,7 @@
 						</execution>
 					</executions>
 				</plugin>
-					
+				<!--
 				<plugin>
 					<inherited>true</inherited>
 					<groupId>com.github.github</groupId>
@@ -269,6 +250,7 @@
 						<repositoryOwner>${repo.user}</repositoryOwner>
 					</configuration>
 				</plugin>
+				-->
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -278,12 +260,14 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 			</plugin>
+			<!--
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
 				<version>${site-maven-plugin.version}</version>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 	

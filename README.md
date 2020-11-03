@@ -7,11 +7,13 @@ Common operations:
   ```git clone https://github.com/InnovAnon-Inc/SimpleJavaPrograms.git```
   ```cd SimpleJavaPrograms```
 - Clean, Build and Test the project:
-  ```mvn clean test```
+  ```mvn             clean test```
 - Deploy artifacts to Maven repository branch on Github:
-```mvn -DskipTests deploy```
+  ```mvn -DskipTests clean deploy```
 - Deploy site/docs to gh-pages branch:
-```mvn -DskipTests site-deploy```
+  ```mvn -DskipTests clean site-deploy```
+- Tag a release:
+  ```mvn -DskipTests clean release:prepare release:perform```
 
 Sub-projects:
 - util:                 common utilities

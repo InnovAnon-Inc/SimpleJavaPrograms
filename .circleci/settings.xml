@@ -4,7 +4,15 @@
 		<server>
 			<id>github</id>
 			<username>${env.GITHUB_API_USERNAME}</username>
-	    		<password>${env.GITHUB_API_PASSWORD}</password>
+	    		<password>${env.GITHUB_API_KEY}</password>
+		</server>
+		<server>
+			<id>gh-pages</id>
+			<username>git</username>
+			<configuration>
+				<scmVersionType>branch</scmVersionType>
+				<scmVersion>gh-pages</scmVersion>
+			</configuration>
 		</server>
 		<server>
 			<id>your.keyname</id>
