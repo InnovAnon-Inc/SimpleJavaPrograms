@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>com.innovanon</groupId>
 		<artifactId>ia</artifactId>
-		<version>0.0.17-SNAPSHOT</version>
+		<version>0.0.18-SNAPSHOT</version>
 	</parent>
 	
 	<contributors>
@@ -46,11 +46,11 @@
 		<module>letter_grade</module>
 		<module>numerical_comparison</module>
 	</modules>
-	<!--
+	
 	<scm>
-		<connection>scm:git:git@github.com:${repo.user}/${repo.name}.git</connection>
-		<developerConnection>scm:git:https://github.com/${repo.user}/${repo.name}.git</developerConnection>
 		<url>https://github.com/${repo.user}/${repo.name}</url>
+		<connection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -83,9 +83,18 @@
 	</ciManagement>
 	
 	<distributionManagement>
-		
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+        <site>
+			<id>gh-pages</id>
+			<name>Github</name>
+			<url>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</url>
+		</site>
     </distributionManagement>
-	-->
+    
 	<repositories>
 		<repository>
 			<id>mvn-repo-pp</id>
@@ -251,6 +260,43 @@
 					</configuration>
 				</plugin>
 				-->
+				<plugin>
+					<inherited>true</inherited>
+					<groupId>com.github.github</groupId>
+					<artifactId>site-maven-plugin</artifactId>
+					<version>${site-maven-plugin.version}</version>
+					<configuration>
+						<repositoryOwner>${repo.user}</repositoryOwner>
+						<repositoryName>${repo.name}</repositoryName>
+					</configuration>
+					<executions>
+						<execution>
+							<id>mvn-repo</id>
+							<configuration>
+								<description>[ci skip] Repo ${project.name} build, ${project.version} release</description>
+								<message>[ci skip] Official ${project.name} build</message>
+								<noJekyll>true</noJekyll>
+								<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+								<branch>refs/heads/mvn-repo</branch>
+								<includes><include>**/*</include></includes>
+								<merge>true</merge>
+							</configuration>
+							<goals>
+								<goal>site</goal>
+							</goals>
+							<phase>deploy</phase>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<inherited>true</inherited>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven-deploy-plugin.version}</version>
+					<configuration>
+						<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
