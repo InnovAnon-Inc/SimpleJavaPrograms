@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon.sjp</groupId>
 	<artifactId>sjp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>pom</packaging>
 
 	<name>Simple Java Programs</name>
@@ -15,16 +15,16 @@
 	<parent>
 		<groupId>com.innovanon</groupId>
 		<artifactId>ia</artifactId>
-		<version>0.0.18-SNAPSHOT</version>
+		<version>0.0.17</version>
 	</parent>
 	
 	<contributors>
 		<contributor>
 			<name>S.T.</name>
-			<email></email>
-			<url></url>
-			<organization></organization>
-			<organizationUrl></organizationUrl>
+			<email />
+			<url />
+			<organization />
+			<organizationUrl />
 			<roles>
 				<role>Assistant Project Manager</role>
 				<role>Research Assistant</role>
@@ -36,7 +36,7 @@
 			</roles>
 			<timezone>America/Chicago</timezone>
 			<properties>
-				<picUrl></picUrl>
+				<picUrl />
 			</properties>
 		</contributor>
 	</contributors>
@@ -47,6 +47,7 @@
 		<module>numerical_comparison</module>
 	</modules>
 	
+	<!--
 	<scm>
 		<url>https://github.com/${repo.user}/${repo.name}</url>
 		<connection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</connection>
@@ -94,16 +95,18 @@
 			<url>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</url>
 		</site>
     </distributionManagement>
-    
+    -->
 	<repositories>
 		<repository>
 			<id>mvn-repo-pp</id>
 			<url>https://raw.github.com/InnovAnon-Inc/IA/mvn-repo/</url>
 		</repository>
+		<!--
 		<repository>
 			<id>mvn-repo</id>
 			<url>https://raw.github.com/${repo.user}/${repo.name}/mvn-repo/</url>
 		</repository>
+		-->
 	</repositories>
 
 	<dependencies>
@@ -260,6 +263,7 @@
 					</configuration>
 				</plugin>
 				-->
+				<!--
 				<plugin>
 					<inherited>true</inherited>
 					<groupId>com.github.github</groupId>
@@ -297,6 +301,7 @@
 						<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
 					</configuration>
 				</plugin>
+				-->
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -366,4 +371,8 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+  <scm>
+    <tag>sjp-0.0.1</tag>
+  </scm>
 </project>
