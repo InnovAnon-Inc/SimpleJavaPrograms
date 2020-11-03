@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon.sjp</groupId>
 	<artifactId>sjp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>pom</packaging>
 
 	<name>Simple Java Programs</name>
@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>com.innovanon</groupId>
 		<artifactId>ia</artifactId>
-		<version>0.0.17-SNAPSHOT</version>
+		<version>0.0.17</version>
 	</parent>
 	
 	<contributors>
@@ -371,4 +371,8 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+  <scm>
+    <tag>sjp-0.0.1</tag>
+  </scm>
 </project>
