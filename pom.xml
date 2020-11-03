@@ -371,8 +371,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
-  <scm>
-    <tag>sjp-0.0.1</tag>
-  </scm>
 </project>
