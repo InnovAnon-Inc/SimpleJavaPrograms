@@ -6,6 +6,8 @@ jobs:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - run: |
           echo -e "$GPG_KEY" | gpg --import
           mvn -e -s .circleci/settings.xml clean compile verify
@@ -14,6 +16,8 @@ jobs:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - run: |
           echo -e "$GPG_KEY" | gpg --import
           mvn -e -s .circleci/settings.xml -DskipTests clean compile site:site site:stage site:deploy
@@ -22,6 +26,8 @@ jobs:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - run: |
           echo -e "$GPG_KEY" | gpg --import
           mvn -e -s .circleci/settings.xml -DskipTests clean compile deploy
@@ -30,6 +36,8 @@ jobs:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - run: |
           echo -e "$GPG_KEY" | gpg --import
           mvn -e -s .circleci/settings.xml -DskipTests --batch release:clean release:prepare release:perform
